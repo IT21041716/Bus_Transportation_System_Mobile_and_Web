@@ -7,16 +7,13 @@ import mongoose from 'mongoose'
 const app =express();
 const PORT = process.env.PORT || 5005;
 
-
-dotenv.config()
+dotenv.config();
 app.use(cors());
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 const URL = process.env.MONGODB_URL;
 
-mongoose.connect(URL, {
-
-})
+mongoose.connect(URL, {});
 
 app.listen(PORT, () => {
   console.log("***************************************");
