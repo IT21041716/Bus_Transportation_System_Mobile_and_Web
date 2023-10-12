@@ -25,3 +25,7 @@ connection.once("open", () => {
   console.log("MONGO_DB Connection successfull......!!");
   console.log("***************************************");
 });
+
+//sajindu
+import SmardCardRouter from './routes/smartCard.js'
+app.use('/smartcard',SmardCardRouter);
