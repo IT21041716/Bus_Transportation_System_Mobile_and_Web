@@ -29,3 +29,6 @@ connection.once("open", () => {
 //sajindu
 import SmardCardRouter from './routes/smartCard.js'
 app.use('/smartcard',SmardCardRouter);
+
+import AdminLoginRouter from './routes/AdminLogin-Routes.js'
+app.use('/admin',AdminLoginRouter);
