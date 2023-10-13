@@ -12,12 +12,12 @@ export const addSmartCard = async (req, res) => {
     const status = req.body.status;
 
     // pid create 
-    const prefix = "PID";
-    const PID = (prefix + "_" + Date.now())
+    const prefix = "SID";
+    const SID = (prefix + "_" + Date.now())
 
     const newSmartCard = new SmartCard({
       uId: uId,
-      PID: PID, // new one
+      SID: SID, // new one
       fullName: fullName,
       nic: nic,
       dob: dob,

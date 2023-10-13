@@ -15,9 +15,8 @@ export const AdminRegister = async (req, res) => {
         message: "User Already registered..!",
       });
     } else if (!ExsistUser) {
-      const prefix = "UID";
+      const prefix = "AID";
       const USER_ID = prefix + Date.now();
-      console.log(USER_ID);
       const newUser = new admin({
         user_id: USER_ID,
         userName: req.body.userName,

@@ -6,7 +6,7 @@ const smartCard = new Schema({
     type: String,
     required: true,
   },
-  PID: {// new aded variable
+  SID: {// new aded variable
     type: String,
     required: true,
   },
@@ -39,7 +39,7 @@ const smartCard = new Schema({
     required: true
   },
   balance: { // new aded variable
-    type: String,
+    type: Number,
     required: true,
   }
 });

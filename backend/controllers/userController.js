@@ -1,6 +1,8 @@
 import user from "../models/user.js";
+import smartCard from "../models/smartCard.js";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+
 
 let refreshTokens = [];
 
@@ -122,14 +124,51 @@ export const tokenRefresh = (req, res, next) => {
     }
 }
 
+export const updateUserSmartCard = async (req, res) => {
+    try {
+        const id = { UID: req.body.UID };
+        const checkCardRequest = await smartCard.findOne({ uId: req.body.UID });
+        if (checkCardRequest) {
+            if (checkCardRequest.status === "Accepted") {
+                const newData = {
+                    smartCardID: req.body.SID,
+                };
+                const update = await user.findOneAndUpdate(id, newData, { new: true });
+                if (update) {
+                    res.status(200).json({
+                        message: "SmartCard added to user...!",
+                        user: {
+                            UID: update.UID,
+                            fullName: update.fullName,
+                            email: update.email,
+                            nic: update.nic,
+                            dob: update.dob,
+                            address: update.address,
+                            contactNo: update.contactNo,
+                            smartCardID: update.smartCardID
+                        }
+                    });
+                } else {
+                    res.status(400).json({
+                        message: "Update failed..!"
+                    });
+                }
 
-export const updateUserSmartCard = async(req,res) => {
-    try{
-        
-    }catch(error){
+            } else if("Denied"){
+                res.status(401).json({
+                    message: "Smartcard Request denied from admin..!"
+                });
+            }
+        } else {
+            res.status(405).json({
+                message: "Smartcard request not found..!"
+            });
+        }
+    } catch (error) {
         res.status(500).json({
-            message: "Somthing went wrong..!",
-            error:error
-        })
+            message: "Something went wrong..!",
+            error: error.message
+        });
     }
-}
+};
+

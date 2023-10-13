@@ -34,5 +34,8 @@ app.use('/smartcard', SmardCardRouter);
 import userRouter from './routes/userRoutes.js'
 app.use('/user', userRouter);
 
+import topUpRouter from './routes/topUpRouter.js'
+app.use('/topup',topUpRouter);
+
 import AdminLoginRouter from './routes/AdminLogin-Routes.js'
 app.use('/admin',AdminLoginRouter);

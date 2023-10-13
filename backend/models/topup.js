@@ -27,15 +27,11 @@ const topupSchema = new Schema({
         type: String,
         required: true,
     },
-    nic: {
-        type: String,
-        required: true,
-    },
     amount: {
         type: String,
         required: true,
     },
 
-})
+}, { timestamps: true })
 
 export default mongoose.model("topUp", topupSchema);
