@@ -33,3 +33,6 @@ app.use('/smartcard', SmardCardRouter);
 //sithanga
 import userRouter from './routes/userRoutes.js'
 app.use('/user', userRouter);
+
+import AdminLoginRouter from './routes/AdminLogin-Routes.js'
+app.use('/admin',AdminLoginRouter);
