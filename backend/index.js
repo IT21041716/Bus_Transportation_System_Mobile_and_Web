@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 
-const app =express();
+const app = express();
 const PORT = process.env.PORT || 5005;
 
 dotenv.config();
@@ -28,4 +28,8 @@ connection.once("open", () => {
 
 //sajindu
 import SmardCardRouter from './routes/smartCard.js'
-app.use('/smartcard',SmardCardRouter);
+app.use('/smartcard', SmardCardRouter);
+
+//sithanga
+import userRouter from './routes/userRoutes.js'
+app.use('/user', userRouter);
