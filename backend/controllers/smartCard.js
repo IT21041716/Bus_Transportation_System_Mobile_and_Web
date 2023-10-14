@@ -1,4 +1,7 @@
 import SmartCard from "../models/smartCard.js";
+import Mailgen from "mailgen";
+import nodemailer from "nodemailer";
+import { EMAIL, PASSWORD } from "../config/config.js";
 
 export const addSmartCard = async (req, res) => {
   try {
@@ -6,12 +9,13 @@ export const addSmartCard = async (req, res) => {
     const fullName = req.body.fullName;
     const nic = req.body.nic;
     const dob = req.body.dob;
+    const email = req.body.email;
     const address = req.body.address;
     const city = req.body.city;
     const postalCode = req.body.postalCode;
-    const status = 'Requested';
+    const status = "Requested";
 
-    // // pid create 
+    // // pid create
     // const prefix = "PID";
     // const PID = (prefix + "_" + Date.now())
 
@@ -21,12 +25,59 @@ export const addSmartCard = async (req, res) => {
       fullName: fullName,
       nic: nic,
       dob: dob,
+      email:email,
       address: address,
       city: city,
       postalCode: postalCode,
       status: status,
-      balance: 0 // new one
+      balance: 0, // new one
     });
+
+    let config = {
+      service: "gmail",
+      auth: {
+        user: EMAIL,
+        pass: PASSWORD,
+      },
+    };
+
+    let transpoter = nodemailer.createTransport(config);
+
+    let MailGenereto = new Mailgen({
+      theme: "default",
+      product: {
+        name: "City Linx",
+        link: "https://mailgen.js/",
+      },
+    });
+
+    let response = {
+      body: {
+        name: sCusName,
+        intro: "Smart Card Requested Successfully!",
+        table: {
+          data: [
+            {
+              FullName: fullName,
+              status: status,
+              date: new Date(),
+            },
+          ],
+        },
+        outro: "Stay tune!",
+      },
+    };
+
+    let mail = MailGenereto.generate(response);
+
+    let message = {
+      from: EMAIL,
+      to: sCusEmail,
+      subject: "Smart card",
+      html: mail,
+    };
+
+    transpoter.sendMail(message);
 
     const newSaCd = await newSmartCard.save();
 
