@@ -9,7 +9,7 @@ export const addSmartCard = async (req, res) => {
     const address = req.body.address;
     const city = req.body.city;
     const postalCode = req.body.postalCode;
-    const status = req.body.status;
+    const status = 'Requested';
 
     // // pid create 
     // const prefix = "PID";
@@ -17,7 +17,7 @@ export const addSmartCard = async (req, res) => {
 
     const newSmartCard = new SmartCard({
       uId: uId,
-      PID: null, // new one
+      PID: "Null", // new one
       fullName: fullName,
       nic: nic,
       dob: dob,
