@@ -85,25 +85,25 @@ export const topUpByUser = async (req, res) => {
 
 export const checkBalance = async (req, res) => {
     try {
-    const check = await smartCard.findOne({ uId: req.body.UID })
-    const balance = check.balance
-    if (check) {
-        if (balance < 100) {
-            res.status(200).json({
-                message: "Account balance getting low..!",
-                payload: balance
-            })
+        const check = await smartCard.findOne({ uId: req.body.UID })
+        const balance = check.balance
+        if (check) {
+            if (balance < 100) {
+                res.status(200).json({
+                    message: "Account balance getting low..!",
+                    payload: balance
+                })
+            } else {
+                res.status(400).json({
+                    message: "Account balance Ok..!",
+                    payload: balance
+                })
+            }
         } else {
-            res.status(400).json({
-                message: "Account balance Ok..!",
-                payload: balance
+            res.staus(404).json({
+                message: 'No smart card found under this UID'
             })
         }
-    } else {
-        res.staus(404).json({
-            message: 'No smart card found under this UID'
-        })
-    }
     } catch (error) {
         res.status(500).json({
             message: 'Somthing went wrong..!',
@@ -143,6 +143,52 @@ export const deductBalance = async (req, res) => {
             } else {
                 res.status(404).json({
                     message: "Deduct failed..!"
+                })
+            }
+        } else {
+            res.staus(403).json({
+                message: 'No smart card found under this UID'
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: 'Somthing went wrong..!',
+            error: error
+        })
+    }
+}
+
+export const claimUpdateBalance = async (req, res) => {
+    try {
+        const checkCard = await smartCard.findOne({ uId: req.body.UID });
+        if (checkCard) {
+            const availableBalance = checkCard.balance;
+            const newBalanace = availableBalance + req.body.amount;
+
+            const data = {
+                balance: newBalanace
+            }
+            const id = { uId: req.body.UID };
+            const update = await smartCard.findOneAndUpdate(id, data, { new: true });
+            if (update) {
+                res.status(201).json({
+                    message: 'Smartcard refund successfull...!',
+                    payload: {
+                        UID: update.UID,
+                        fullName: update.fullName,
+                        email: req.body.email,
+                        nic: update.nic,
+                        dob: update.dob,
+                        address: update.address,
+                        contactNo: update.contactNo,
+                        smartCardID: update.smartCardID,
+                        balance: update.balance
+                    }
+                })
+
+            } else {
+                res.status(404).json({
+                    message: " failed..!"
                 })
             }
         } else {
