@@ -30,7 +30,7 @@ const smartCard = new Schema({
     type: String,
     required: true,
   },
-  email: {
+  uEmail: {
     type: String,
     required: true,
   },

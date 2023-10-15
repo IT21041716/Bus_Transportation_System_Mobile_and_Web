@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SmartCardDashboard from "./it21042560/SmartCardDashboard";
+// import AdminLogin from "./IT21049590/AdminLogin";
+//import UserProfile from "./IT21049590/UserProfile";
 import AdminLogin from "./IT21049590/AdminLogin";
 import AdminProfile from "./IT21049590/AdminProfile";
 import "bootstrap/dist/css/bootstrap.css";
@@ -20,6 +22,8 @@ function App() {
 
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/adminProfile" element={<AdminProfile />} />
+
+          
         </Routes>
       </BrowserRouter>
     </>
