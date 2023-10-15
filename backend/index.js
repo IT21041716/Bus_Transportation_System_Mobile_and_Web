@@ -39,3 +39,9 @@ app.use('/topup',topUpRouter);
 
 import AdminLoginRouter from './routes/AdminLogin-Routes.js'
 app.use('/admin',AdminLoginRouter);
+
+import reservationRoutes from "./routes/reservationRoutes.js";
+app.use("/reservations", reservationRoutes);
+
+import reservationCancelRoutes from "./routes/reservationCancelRoutes.js";
+app.use("/reservation-cancels", reservationCancelRoutes);
