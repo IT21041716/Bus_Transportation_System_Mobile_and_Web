@@ -15,6 +15,7 @@ export default function SmartCardRequest() {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [email, setEmail] = useState("");
   const [uId, setUID] = useState("112233445566778899");
   const navigate = useNavigate();
 
@@ -31,19 +32,23 @@ export default function SmartCardRequest() {
       toast.error("Please enter city");
     } else if (postalCode == "") {
       toast.error("Please enter postal code");
+    }else if (email == "") {
+        toast.error("Please enter postal code");
     } else if (
       fullName != "" &&
       nic != "" &&
       dob != "" &&
       address != "" &&
       city != "" &&
-      postalCode != ""
+      postalCode != "" &&
+      email != ""
     ) {
       const smartCard = {
         uId,
         fullName,
         nic,
         dob,
+        email,
         address,
         city,
         postalCode,
@@ -139,6 +144,23 @@ export default function SmartCardRequest() {
                   required
                   name="1"
                   onChange={(e) => setNIC(e.target.value)}
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group
+              as={Row}
+              className="mb-3"
+              controlId="formHorizontalPassword"
+            >
+              <Form.Label column sm={3}>
+                Email :
+              </Form.Label>
+              <Col sm={9}>
+                <Form.Control
+                  type="text"
+                  required
+                  name="1"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Col>
             </Form.Group>
