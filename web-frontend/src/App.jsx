@@ -20,9 +20,6 @@ function App() {
           <Route path="/smartcard/request" element={<SmartCardRequest />} />
 
 
-
-
-          
           {/* <Route path="/adminLogin" element={<AdminLogin />} /> */}
           <Route path="/userProfile" element={<UserProfile />} />
         </Routes>

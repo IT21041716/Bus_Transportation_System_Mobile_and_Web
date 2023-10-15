@@ -9,7 +9,7 @@ export const addSmartCard = async (req, res) => {
     const fullName = req.body.fullName;
     const nic = req.body.nic;
     const dob = req.body.dob;
-    const email = req.body.email;
+    const uEmail = req.body.email;
     const address = req.body.address;
     const city = req.body.city;
     const postalCode = req.body.postalCode;
@@ -25,13 +25,16 @@ export const addSmartCard = async (req, res) => {
       fullName: fullName,
       nic: nic,
       dob: dob,
-      email:email,
+      uEmail:uEmail,
       address: address,
       city: city,
       postalCode: postalCode,
       status: status,
       balance: 0, // new one
     });
+
+    console.log(newSmartCard)
+    console.log(EMAIL,PASSWORD)
 
     let config = {
       service: "gmail",
@@ -51,15 +54,17 @@ export const addSmartCard = async (req, res) => {
       },
     });
 
+    console.log('hari')
+
     let response = {
       body: {
-        name: sCusName,
+        name: fullName,
         intro: "Smart Card Requested Successfully!",
         table: {
           data: [
             {
-              FullName: fullName,
-              status: status,
+              Name: fullName,
+              statuss: status,
               date: new Date(),
             },
           ],
@@ -68,20 +73,29 @@ export const addSmartCard = async (req, res) => {
       },
     };
 
+    console.log('hari2')
+
+
     let mail = MailGenereto.generate(response);
+    console.log('hari4')
 
     let message = {
       from: EMAIL,
-      to: sCusEmail,
+      to: uEmail,
       subject: "Smart card",
       html: mail,
     };
+    console.log('hari5')
 
     transpoter.sendMail(message);
+    console.log('hari6')
 
     const newSaCd = await newSmartCard.save();
+    console.log('hari7')
 
     if (newSaCd) {
+      console.log('hari3')
+
       res.status(200).json({
         message: "New Smart Card Added",
         payload: newSaCd,
