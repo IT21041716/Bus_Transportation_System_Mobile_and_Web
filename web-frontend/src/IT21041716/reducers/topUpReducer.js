@@ -1,84 +1,102 @@
-import { authConstants } from '../actions/constants'
+import { topUpConstants } from '../actions/constants'
 
 const initState = {
     loading: false,
-    authenticated: false,
-    user: {}
+    topUps: [],
+    smartCard: {},
+    balance: 0
 }
 
 export default (state = initState, action) => {
     switch (action.type) {
-        case authConstants.LOGIN_REQUEST:
-            state = {
-                ...state,
-                loading: true,
-                authenticated: false
-            }
-            break;
-        case authConstants.LOGIN_SUCCESS:
-            state = {
-                ...state,
-                loading: false,
-                authenticated: true,
-                user: action.payload.user
-            }
-            break;
-        case authConstants.LOGIN_ERROR:
-            state = {
-                ...state,
-                loading: false,
-                authenticated: false
-            }
-            break;
-        case authConstants.SIGNUP_REQUEST:
+        case topUpConstants.NEW_TOPUP_REQUEST:
             state = {
                 ...state,
                 loading: true
             }
             break;
-        case authConstants.SIGNUP_SUCCESS:
-            state = {
-                ...state,
-                loading: false
-            }
-            break;
-        case authConstants.SIGNUP_ERROR:
-            state = {
-                ...state,
-                loading: false
-            }
-            break;
-        case authConstants.LOGOUT_REQUEST:
-            state = {
-                ...state,
-                loading: true
-            }
-            break;
-        case authConstants.LOGOUT_SUCCESS:
-            state = {
-                ...initState
-            }
-            break;
-        case authConstants.LOGOUT_ERROR:
-            state = {
-                ...state,
-                loading: false
-            }
-            break;
-        case authConstants.SMRT_CARD_UPDATE_REQUEST:
-            state = {
-                ...state,
-                loading: true
-            }
-            break;
-        case authConstants.SMRT_CARD_UPDATE_SUCCESS:
+        case topUpConstants.NEW_TOPUP_SUCCESS:
             state = {
                 ...state,
                 loading: false,
-                user: action.payload
+                smartCard: action.payload
             }
             break;
-        case authConstants.LOGOUT_ERROR:
+        case topUpConstants.NEW_TOPUP_ERROR:
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case topUpConstants.CHK_BALANCE_REQUEST:
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case topUpConstants.CHK_BALANCE_SUCCESS:
+            state = {
+                ...state,
+                loading: false,
+                balance: action.payload
+            }
+            break;
+        case topUpConstants.CHK_BALANCE_ERROR:
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case topUpConstants.DEDUCT_BALANCE_REQUEST:
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case topUpConstants.DEDUCT_BALANCE_SUCCESS:
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case topUpConstants.DEDUCT_BALANCE_ERROR:
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case topUpConstants.CLAIM_UPDATE_BALANCE_REQUEST:
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case topUpConstants.CLAIM_UPDATE_BALANCE_SUCCESS:
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case topUpConstants.CLAIM_UPDATE_BALANCE_ERROR:
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case topUpConstants.GET_ALL_REQUEST:
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case topUpConstants.GET_ALL_SUCCESS:
+            state = {
+                ...state,
+                loading: false,
+                topUps: action.payload
+            }
+            break;
+        case topUpConstants.GET_ALL_ERROR:
             state = {
                 ...state,
                 loading: false

@@ -113,3 +113,30 @@ export const isLoggedIn = () => {
         }
     }
 }
+
+export const updateUserSmartCard = (data) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: authConstants.SMRT_CARD_UPDATE_REQUEST })
+            const res = await axios.post("http://localhost:5005/user/updateSmrtCard", data)
+            if (res.status === 200) {
+                dispatch({
+                    type: authConstants.SMRT_CARD_UPDATE_SUCCESS,
+                    payload: res.data.user
+                })
+                toast.success(res.data.message)
+            } else if (res.status === 401) {
+                toast.error(res.data.message)
+                dispatch({ type: authConstants.SMRT_CARD_UPDATE_ERROR })
+            } else if (res.status === 400) {
+                toast.error(res.data.message)
+                dispatch({ type: authConstants.SMRT_CARD_UPDATE_ERROR })
+            } else if (res.status === 405) {
+                toast.error(res.data.message)
+                dispatch({ type: authConstants.SMRT_CARD_UPDATE_ERROR })
+            }
+        } catch (error) {
+            dispatch({ type: authConstants.SMRT_CARD_UPDATE_ERROR })
+        }
+    }
+}

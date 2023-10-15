@@ -50,7 +50,7 @@ export const newTopup = async (req, res) => {
             }
         } else {
             res.status(403).json({
-                message: "Topup failed..!"
+                message: "Not found..!"
             })
         }
 
@@ -94,7 +94,7 @@ export const checkBalance = async (req, res) => {
                     payload: balance
                 })
             } else {
-                res.status(400).json({
+                res.status(201).json({
                     message: "Account balance Ok..!",
                     payload: balance
                 })
@@ -164,6 +164,8 @@ export const claimUpdateBalance = async (req, res) => {
         if (checkCard) {
             const availableBalance = checkCard.balance;
             const newBalanace = availableBalance + req.body.amount;
+            console.log(availableBalance)
+            console.log(newBalanace)
 
             const data = {
                 balance: newBalanace
