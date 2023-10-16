@@ -2,15 +2,15 @@ import { authConstants } from './constants'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 
+//working
 export const Login = (data) => {
     return async (dispatch) => {
         try {
-
             dispatch({ type: authConstants.LOGIN_REQUEST })
             const res = await axios.post('http://localhost:5005/user/login', data)
             if (res.status === 200) {
-                const token = user.data.token
-                const user = user.data.user
+                const token = res.data.token
+                const user = res.data.user
 
                 localStorage.setItem("token", token)
                 localStorage.setItem("user", JSON.stringify(user));
@@ -43,7 +43,7 @@ export const Login = (data) => {
         }
     }
 }
-
+//working
 export const Register = (data) => {
     return async (dispatch) => {
         try {
@@ -75,6 +75,7 @@ export const Register = (data) => {
     }
 }
 
+
 export const signout = () => {
     return async (dispatch) => {
         dispatch({ type: authConstants.LOGOUT_REQUEST })
@@ -91,6 +92,7 @@ export const signout = () => {
     }
 }
 
+//working
 export const isLoggedIn = () => {
     return async (dispatch) => {
         const token = localStorage.getItem("token");
@@ -113,6 +115,7 @@ export const isLoggedIn = () => {
         }
     }
 }
+
 
 export const updateUserSmartCard = (data) => {
     return async (dispatch) => {

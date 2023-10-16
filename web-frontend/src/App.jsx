@@ -1,16 +1,41 @@
-import { useState } from "react";
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SmartCardDashboard from "./it21042560/SmartCardDashboard";
-// import AdminLogin from "./IT21049590/AdminLogin";
-//import UserProfile from "./IT21049590/UserProfile";
-import AdminLogin from "./IT21049590/AdminLogin";
-import AdminProfile from "./IT21049590/AdminProfile";
-import "bootstrap/dist/css/bootstrap.css";
-import SmartCardRequest from "./it21042560/SmartCardRequest";
-import { Toaster } from "react-hot-toast";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.css';
+import { Toaster } from 'react-hot-toast';
+import { checkBalance } from './IT21041716/actions/topUpAction';
+import { isLoggedIn } from './IT21041716/actions/authAction';
+import Swal from 'sweetalert2'
+
+import SmartCardRequest from './it21042560/SmartCardRequest';
+import SmartCardDashboard from './it21042560/SmartCardDashboard';
+import AdminLogin from './IT21049590/AdminLogin';
+import AdminProfile from './IT21049590/AdminProfile';
+
+
+import Register from './IT21041716/scenes/Register';
+import UserLogin from './IT21041716/scenes/UserLogin';
+import TopUp from './IT21041716/scenes/topUp'
 
 function App() {
+  const dispatch = useDispatch();
+  const authenticated = useSelector((state) => state.auth.authenticated);
+  const user = useSelector((state) => state.auth.user);
+  const UID = user ? user.UID : null;
+
+  useEffect(() => {
+    if (!authenticated) {
+      dispatch(isLoggedIn());
+    }
+  }, [dispatch, authenticated]);
+
+  useEffect(() => {
+    if (UID) {
+      dispatch(checkBalance({ UID }));
+    }
+  }, [dispatch, UID]);
+
   return (
     <>
       <BrowserRouter>
@@ -23,7 +48,11 @@ function App() {
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/adminProfile" element={<AdminProfile />} />
 
-          
+          {/* sithanga */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<UserLogin />} />
+          <Route path="/topup" element={<TopUp />} />
+
         </Routes>
       </BrowserRouter>
     </>

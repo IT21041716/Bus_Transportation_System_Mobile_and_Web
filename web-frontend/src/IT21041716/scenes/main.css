@@ -1,0 +1,52 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 77vh;
+    border-top: 2px solid black;
+}
+
+.innerDivContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    min-height: 40%;
+    max-width: 40%;
+    height: 100px;
+    margin-top: 2rem;
+    border-radius: 20px;
+    background-color: #000347;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+
+}
+
+.innerDivContainer#innerDivMain {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    width: 95%;
+    max-width: 95%;
+    height: 40vh;
+    margin-top: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    border-radius: none;
+}
+
+.smallDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 400px;
+    min-height: 350px;
+    background-color: #e2e2e2;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+}

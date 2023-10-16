@@ -32,17 +32,13 @@ export const NewTopUp = (data) => {
     }
 }
 
+//working
 export const checkBalance = (data) => {
     return async (dispatch) => {
         try {
             dispatch({ type: topUpConstants.CHK_BALANCE_REQUEST })
             const res = await axios.post("http://localhost:5005/topup/check", data)
-            if (res.status === 200) {
-                dispatch({
-                    type: topUpConstants.CHK_BALANCE_SUCCESS,
-                    payload: res.data.payload
-                })
-            } else if (res.status === 201) {
+            if (res.status === 200 || res.status === 201) {
                 dispatch({
                     type: topUpConstants.CHK_BALANCE_SUCCESS,
                     payload: res.data.payload
@@ -55,7 +51,7 @@ export const checkBalance = (data) => {
         }
     }
 }
-
+//working
 export const getAllByUser = (data) => {
     return async (dispatch) => {
         try {
@@ -96,6 +92,7 @@ export const reduceBalance = (data) => {
         }
     }
 }
+
 export const claimUpdateBalance = (data) => {
     return async (dispatch) => {
         try {
