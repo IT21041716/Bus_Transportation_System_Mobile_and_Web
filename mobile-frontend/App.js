@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import SmartCard from './screen/Smartcard';
+import SmartCard from './screen/it21042560/Smartcard';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
