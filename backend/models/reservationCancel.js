@@ -10,7 +10,7 @@ const reservationCancelSchema = new mongoose.Schema({
   state: {
     type: String,
     enum: ["accepted", "pending", "rejected"],
-    required: true,
+    required: false,
   },
   reason: {
     type: String,

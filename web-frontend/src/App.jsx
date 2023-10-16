@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Toaster } from 'react-hot-toast';
 import { checkBalance } from './IT21041716/actions/topUpAction';
 import { isLoggedIn } from './IT21041716/actions/authAction';
-import Swal from 'sweetalert2'
 
 import SmartCardRequest from './it21042560/SmartCardRequest';
 import SmartCardDashboard from './it21042560/SmartCardDashboard';
@@ -17,6 +16,8 @@ import AdminProfile from './IT21049590/AdminProfile';
 import Register from './IT21041716/scenes/Register';
 import UserLogin from './IT21041716/scenes/UserLogin';
 import TopUp from './IT21041716/scenes/topUp'
+
+import ReservationCancelForm from "./IT21049590/ReservationCancelForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function App() {
           <Route path="/login" element={<UserLogin />} />
           <Route path="/topup" element={<TopUp />} />
 
+          <Route path="/resCancel/:id" element={<ReservationCancelForm />} />
         </Routes>
       </BrowserRouter>
     </>
