@@ -9,6 +9,7 @@ import AdminProfile from "./IT21049590/AdminProfile";
 import "bootstrap/dist/css/bootstrap.css";
 import SmartCardRequest from "./it21042560/SmartCardRequest";
 import { Toaster } from "react-hot-toast";
+import ReservationCancelForm from "./IT21049590/ReservationCancelForm";
 
 function App() {
   return (
@@ -22,8 +23,7 @@ function App() {
 
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/adminProfile" element={<AdminProfile />} />
-
-          
+          <Route path="/resCancel/:id" element={<ReservationCancelForm />} />
         </Routes>
       </BrowserRouter>
     </>
