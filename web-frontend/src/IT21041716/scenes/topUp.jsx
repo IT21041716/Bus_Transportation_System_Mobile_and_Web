@@ -52,7 +52,7 @@ const topUp = () => {
     };
 
     useEffect(() => {
-        if (!user.fullName) {
+        if (!user.smartCardID) {
             const timeout = setTimeout(() => {
                 Swal.fire({
                     text: 'You have to log in to your account when you want to use this service. If you are not a registered user, please be kind enough to register..!',
@@ -158,4 +158,5 @@ const topUp = () => {
     )
 }
 
-export default topUp
+
+export default topUp;

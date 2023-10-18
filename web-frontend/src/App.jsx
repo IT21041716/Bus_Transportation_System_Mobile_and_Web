@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import { Toaster } from 'react-hot-toast';
-import { checkBalance } from './IT21041716/actions/topUpAction';
-import { isLoggedIn } from './IT21041716/actions/authAction';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import { Toaster } from "react-hot-toast";
+import { checkBalance } from "./IT21041716/actions/topUpAction";
+import { isLoggedIn } from "./IT21041716/actions/authAction";
 
-import SmartCardRequest from './it21042560/SmartCardRequest';
-import SmartCardDashboard from './it21042560/SmartCardDashboard';
-import AdminLogin from './IT21049590/AdminLogin';
-import AdminProfile from './IT21049590/AdminProfile';
+import SmartCardRequest from "./it21042560/SmartCardRequest";
+import SmartCardDashboard from "./it21042560/SmartCardDashboard";
+import AdminLogin from "./IT21049590/AdminLogin";
+import AdminProfile from "./IT21049590/AdminProfile";
 
-
-import Register from './IT21041716/scenes/Register';
-import UserLogin from './IT21041716/scenes/UserLogin';
-import TopUp from './IT21041716/scenes/topUp'
+import Register from "./IT21041716/scenes/Register";
+import UserLogin from "./IT21041716/scenes/UserLogin";
+import TopUp from "./IT21041716/scenes/topUp";
 
 import ReservationCancelForm from "./IT21049590/ReservationCancelForm";
+import UserJourney from "./IT21049590/UserJourney";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +55,7 @@ function App() {
           <Route path="/topup" element={<TopUp />} />
 
           <Route path="/resCancel/:id" element={<ReservationCancelForm />} />
+          <Route path="/userJourney/:UID" element={<UserJourney />} />
         </Routes>
       </BrowserRouter>
     </>

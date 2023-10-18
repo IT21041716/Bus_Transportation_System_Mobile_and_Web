@@ -19,11 +19,7 @@ const Reservations = () => {
   const { Option } = Select;
 
   const columns = [
-    {
-      title: "Reservation ID",
-      dataIndex: "_id",
-      key: "id",
-    },
+  
     {
       title: "Created By",
       dataIndex: "createdBy",
@@ -41,7 +37,7 @@ const Reservations = () => {
       key: "status",
     },
     {
-      title: "Reserved To",
+      title: "Location",
       dataIndex: "reservedTo",
       key: "reservedTo",
     },
@@ -158,6 +154,43 @@ const Reservations = () => {
         onOk={handleModalOk}
         onCancel={handleModalCancel}
       >
+        <Form form={form} layout="vertical">
+          <Form.Item
+            name="createdBy"
+            label="Created By"
+            rules={[{ required: true, message: "Please enter a value" }]}
+          >
+            <Input disabled={editingReservation} />
+          </Form.Item>
+          <Form.Item
+            name="reservedDate"
+            label="Reserved Date"
+            rules={[{ required: true, message: "Please enter a value" }]}
+          >
+            <DatePicker
+              disabled={editingReservation}
+              showTime
+              format="YYYY-MM-DD HH:mm:ss"
+            />
+          </Form.Item>
+          <Form.Item
+            name="status"
+            label="Status"
+            rules={[{ required: true, message: "Please enter a value" }]}
+          >
+            <Select>
+              <Option value="active">Active</Option>
+              <Option value="not-active">Not Active</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            name="Location"
+            label="Location"
+            rules={[{ required: true, message: "Please enter a value" }]}
+          >
+            <Input disabled={editingReservation} />
+          </Form.Item>
+        </Form>
         {/* ... (existing form) */}
       </Modal>
 
