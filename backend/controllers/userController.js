@@ -52,6 +52,7 @@ export const Register = async (req, res) => {
 }
 
 export const Login = async (req, res) => {
+    console.log(req.body)
     try {
         const checkUser = await user.findOne({ email: req.body.email });
         if (checkUser) {
@@ -154,7 +155,7 @@ export const updateUserSmartCard = async (req, res) => {
                     });
                 }
 
-            } else if("Denied"){
+            } else if ("Denied") {
                 res.status(401).json({
                     message: "Smartcard Request denied from admin..!"
                 });

@@ -3,6 +3,11 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+// import Stripe from 'stripe'
+import stripePackage from 'stripe';
+const stripe = stripePackage(process.env.STRIPE_KEY);
+
+// const stripe = new Stripe(process.env.STRIPE_KEY)
 
 const app = express();
 const PORT = process.env.PORT || 5005;
@@ -47,3 +52,25 @@ import reservationCancelRoutes from "./routes/reservationCancelRoutes.js";
 app.use("/reservation-cancels", reservationCancelRoutes);
 
 
+app.post("/payment", async (req, res) => {
+	let { amount} = req.body
+	try {
+		const payment = await stripe.paymentIntents.create({
+			amount,
+			currency: "LKR",
+			description: "CITYLINK",
+			confirm: true
+		})
+		console.log("Payment", payment)
+		res.json({
+			message: "Payment successful",
+			success: true
+		})
+	} catch (error) {
+		console.log("Error", error)
+		res.json({
+			message: "Payment failed",
+			success: false
+		})
+	}
+})

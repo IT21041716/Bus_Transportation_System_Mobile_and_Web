@@ -34,21 +34,41 @@ const topUp = () => {
     const recentTopups = topUps.slice(Math.max(topUps.length - 8, 0));
     const recentTrips = trips.slice(Math.max(trips.length - 8, 0));
 
-    const onToken = (token) => { };
-
-    const sendData = (e) => {
-        e.preventDefault();
-
-        const form = {
-            UID: UID,
-            smartCardID: user.smartCardID,
-            fullName: user.fullName,
-            contactNo: user.contactNo,
-            email: user.email,
-            amount: parseFloat(amount),
-        };
-        dispatch(NewTopUp(form));
-        setAmount('');
+    const onToken = (token) => {
+        fetch('http://localhost:5005/payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer sk_test_51N4pjFFfj2A5CMYsrbLbeS69lbZ5H7t4PkzpaABdrGln8w3aGD11wrMVx537VINKhQgiXICUwgRXU4TrS55gtxp900llacGuwG`,
+            },
+            body: JSON.stringify({
+                id: token.id,
+                amount: amount,
+            }),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then((data) => {
+                if (data) {
+                    const form = {
+                        UID: UID,
+                        smartCardID: user.smartCardID,
+                        fullName: user.fullName,
+                        contactNo: user.contactNo,
+                        email: user.email,
+                        amount: parseFloat(amount),
+                    };
+                    dispatch(NewTopUp(form));
+                    setAmount('');
+                }
+            })
+            .catch((error) => {
+            });
     };
 
     useEffect(() => {
@@ -122,7 +142,7 @@ const topUp = () => {
                         <h4>RECHARGE ACCOUNT BALANCE</h4>
                         <span style={{ textAlign: 'justify', width: '300px', marginTop: '1rem' }}>Keep your travel hassle-free by ensuring a sufficient account balance for our CITYLINK public transportation services. Recharge your balance promptly to avoid any interruptions during your travels.</span>
 
-                        <form style={{ textAlign: 'center', marginTop: '2rem' }} onSubmit={sendData}>
+                        <form style={{ textAlign: 'center', marginTop: '2rem' }}>
                             <input
                                 type="text"
                                 placeholder="Enter recharge amount"
@@ -143,7 +163,6 @@ const topUp = () => {
                                     <button
                                         type="button"
                                         style={{ padding: '10px 20px', border: 'none', backgroundColor: '#000347', color: 'white', borderRadius: '5px', cursor: 'pointer' }}
-                                        onClick={sendData}
                                     >
                                         Recharge
                                     </button>

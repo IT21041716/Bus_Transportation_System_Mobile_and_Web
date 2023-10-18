@@ -11,6 +11,9 @@ export const newTopup = async (req, res) => {
         const prefix = "PID"
         const PID = (prefix + "_" + Date.now())
 
+        //MESSAGE 
+        const phoneNumber = parsePhoneNumberFromString(req.body.contactNo, 'LK');
+        const Twilio = new twilio(process.env.SID, process.env.TWILIO_KEY)
         const data = new topup({
             PID: PID,
             UID: req.body.UID,
@@ -33,15 +36,11 @@ export const newTopup = async (req, res) => {
             const update = await smartCard.findOneAndUpdate(id, data, { new: true });
             if (update) {
                 try {
-
-                    //MESSAGE 
-                    const phoneNumber = parsePhoneNumberFromString(update.contactNo, 'LK');
-                    const Twilio = new twilio(process.env.SID, process.env.TWILIO_KEY)
                     const formattedNumber = phoneNumber.format("E.164");
                     const msg = await Twilio.messages.create({
                         from: "+15408541304",
                         to: formattedNumber,
-                        body: `Sent from your CITYLINK \n UID: ${req.body.UID}\n Smart Card ID: ${update.smartCardID}\n Name: ${update.fullName}\n Amount: ${req.body.amount}\n Balance: ${newBalanace}\n\n Account balance increased. Thank you for choosing CITYLINK. For any queries or assistance, feel free to reach out to us. Stay connected with us!`
+                        body: `Sent from your CITYLINK \n UID: ${req.body.UID}\n Smart Card ID: ${req.body.smartCardID}\n Name: ${req.body.fullName}\n Amount: ${req.body.amount}\n Balance: ${newBalanace}\n\n Account balance increased. Thank you for choosing CITYLINK. For any queries or assistance, feel free to reach out to us. Stay connected with us!`
                     });
                     console.log("message sent");
                 } catch (error) {
@@ -150,14 +149,14 @@ export const deductBalance = async (req, res) => {
 
                 //message sent
                 //MESSAGE 
-                const phoneNumber = parsePhoneNumberFromString(update.contactNo, 'LK');
+                const phoneNumber = parsePhoneNumberFromString(req.body.contactNo, 'LK');
                 const Twilio = new twilio(process.env.SID, process.env.TWILIO_KEY)
                 try {
                     const formattedNumber = phoneNumber.format("E.164");
                     const msg = await Twilio.messages.create({
                         from: "+15408541304",
                         to: formattedNumber,
-                        body: `Sent from your CITYLINK \n UID: ${req.body.UID}\n Smart Card ID: ${update.smartCardID}\n Name: ${update.fullName}\n Amount: ${req.body.amount}\n Route: ${req.body.route}\n Destination: ${req.body.destination}\n Balance: ${newBalanace}\n\n Ticket pruchase details. Thank you for choosing CITYLINK. For any queries or assistance, feel free to reach out to us. Stay connected with us!`
+                        body: `Sent from your CITYLINK \n UID: ${req.body.UID}\n Smart Card ID: ${update.SID}\n Name: ${update.fullName}\n Amount: ${req.body.amount}\n Route: ${req.body.route}\n Destination: ${req.body.destination}\n Balance: ${newBalanace}\n\n Purchase ticket details. Thank you for choosing CITYLINK. For any queries or assistance, feel free to reach out to us. Stay connected with us!`
                     });
                     console.log("message sent");
                 } catch (error) {
@@ -221,14 +220,14 @@ export const claimUpdateBalance = async (req, res) => {
             if (update) {
 
                 //MESSAGE 
-                const phoneNumber = parsePhoneNumberFromString(update.contactNo, 'LK');
+                const phoneNumber = parsePhoneNumberFromString(req.body.contactNo, 'LK');
                 const Twilio = new twilio(process.env.SID, process.env.TWILIO_KEY)
                 try {
                     const formattedNumber = phoneNumber.format("E.164");
                     const msg = await Twilio.messages.create({
                         from: "+15408541304",
                         to: formattedNumber,
-                        body: `Sent from your CITYLINK \n UID: ${req.body.UID}\n Smart Card ID: ${update.smartCardID}\n Name: ${update.fullName}\n Amount: ${req.body.amount}\n Balance: ${newBalanace}\n\n Refund successfull. Thank you for choosing CITYLINK. For any queries or assistance, feel free to reach out to us. Stay connected with us!`
+                        body: `Sent from your CITYLINK \n UID: ${req.body.UID}\n Smart Card ID: ${update.SID}\n Name: ${update.fullName}\n Amount: ${req.body.amount}\n Balance: ${newBalanace}\n\n Refund successfull. Thank you for choosing CITYLINK. For any queries or assistance, feel free to reach out to us. Stay connected with us!`
                     });
                     console.log("message sent");
                 } catch (error) {

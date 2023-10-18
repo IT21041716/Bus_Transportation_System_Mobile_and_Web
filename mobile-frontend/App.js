@@ -5,7 +5,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import store from './screen/IT21041716/store/index'
+import { Provider } from 'react-redux';
+
+
 import SmartCard from './screen/it21042560/Smartcard';
+import TopUp from './screen/IT21041716/topup'
+import Login from './screen/IT21041716/login'
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -20,8 +26,28 @@ function MainStack() {
 
 export default function App() {
   return (
-    <NavigationContainer> 
-    <Tab.Navigator barStyle={{backgroundColor:'#4169e1'}}>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Main"
+            component={MainScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  );
+}
+
+function MainScreen() {
+  return (
+    <Tab.Navigator barStyle={{ backgroundColor: '#4169e1' }}>
       <Tab.Screen
         name="Home"
         component={MainStack}
@@ -29,7 +55,7 @@ export default function App() {
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'ios-home' : 'ios-home-outline'} size={size} color={color} />
           ),
-          headerShown:false
+          headerShown: false
         }}
       />
       <Tab.Screen
@@ -39,11 +65,19 @@ export default function App() {
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name={focused ? 'ios-settings' : 'ios-settings-outline'} size={size} color={color} />
           ),
-          headerShown:false
+          headerShown: false
+        }}
+      />
+      <Tab.Screen
+        name="Cash"
+        component={TopUp}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons name={focused ? 'cash-outline' : 'cash-outline'} size={size} color={color} />
+          ),
+          headerShown: false
         }}
       />
     </Tab.Navigator>
-  </NavigationContainer>
   );
 }
-
