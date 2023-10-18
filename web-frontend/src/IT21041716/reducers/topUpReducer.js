@@ -3,6 +3,7 @@ import { topUpConstants } from '../actions/constants'
 const initState = {
     loading: false,
     topUps: [],
+    trips: [],
     smartCard: {},
     balance: 0
 }
@@ -19,7 +20,8 @@ export default (state = initState, action) => {
             state = {
                 ...state,
                 loading: false,
-                smartCard: action.payload
+                smartCard: action.payload,
+                balance:action.payload.balance
             }
             break;
         case topUpConstants.NEW_TOPUP_ERROR:
@@ -56,7 +58,8 @@ export default (state = initState, action) => {
         case topUpConstants.DEDUCT_BALANCE_SUCCESS:
             state = {
                 ...state,
-                loading: false
+                loading: false,
+                balance: action.payload.balance
             }
             break;
         case topUpConstants.DEDUCT_BALANCE_ERROR:
@@ -74,7 +77,8 @@ export default (state = initState, action) => {
         case topUpConstants.CLAIM_UPDATE_BALANCE_SUCCESS:
             state = {
                 ...state,
-                loading: false
+                loading: false,
+                balance:action.payload.balance
             }
             break;
         case topUpConstants.CLAIM_UPDATE_BALANCE_ERROR:
@@ -97,6 +101,25 @@ export default (state = initState, action) => {
             }
             break;
         case topUpConstants.GET_ALL_ERROR:
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case topUpConstants.ALL_TRIPS_REQUEST:
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case topUpConstants.ALL_TRIPS_SUCCESS:
+            state = {
+                ...state,
+                loading: false,
+                trips: action.payload
+            }
+            break;
+        case topUpConstants.ALL_TRIPS_ERROR:
             state = {
                 ...state,
                 loading: false

@@ -22,7 +22,7 @@ app.listen(PORT, () => {
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-  console.log("MONGO_DB Connection successfull......!!");
+  console.log("MONGO_DB Connection successfull...!!");
   console.log("***************************************");
 });
 

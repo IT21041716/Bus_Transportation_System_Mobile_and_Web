@@ -114,3 +114,23 @@ export const claimUpdateBalance = (data) => {
         }
     }
 }
+
+
+export const Alltrips = (data) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: topUpConstants.ALL_TRIPS_REQUEST })
+            const res = await axios.post("http://localhost:5005/topup/trips", data)
+            if (res.status === 200) {
+                dispatch({
+                    type: topUpConstants.ALL_TRIPS_SUCCESS,
+                    payload: res.data.payload
+                })
+            } else if (res.status === 404) {
+                dispatch({ type: topUpConstants.ALL_TRIPS_ERROR })
+            }
+        } catch (error) {
+            dispatch({ type: topUpConstants.ALL_TRIPS_ERROR })
+        }
+    }
+}
