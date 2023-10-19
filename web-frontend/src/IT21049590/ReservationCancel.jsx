@@ -9,6 +9,8 @@ const ReservationCancel = () => {
   const [form] = Form.useForm();
   const [editingCancelRequest, setEditingCancelRequest] = useState(null);
   const API_URL = "http://localhost:5005/journey/";
+  const API_URL1 = "http://localhost:5005/topup/claimUpdate";
+  claimUpdate
   // const reservationCancelService = ReservationCancelService.getInstance();
   const acceptCancellation = (data) => {
     console.log(data);
@@ -35,6 +37,9 @@ const ReservationCancel = () => {
       price: data.price,
     };
     axios.put(API_URL + data._id, model).then((response) => {
+      getJourneys();
+    });
+    axios.post(API_URL1,model).then((response) => {
       getJourneys();
     });
   };
