@@ -18,7 +18,6 @@ import TopUp from "./IT21041716/scenes/topUp";
 
 import ReservationCancelForm from "./IT21049590/ReservationCancelForm";
 import UserJourney from "./IT21049590/UserJourney";
-
 function App() {
   const dispatch = useDispatch();
   const authenticated = useSelector((state) => state.auth.authenticated);
