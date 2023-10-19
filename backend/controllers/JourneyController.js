@@ -104,3 +104,11 @@ export const deleteJourney = async (req, res) => {
       .json({ message: "Something went wrong", error: error.message });
   }
 };
+export const deleteAllJourneys = async (req, res) => {
+  try {
+    await Journey.deleteMany({});
+    res.status(204).json({ message: "All journeys deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong", error: error.message });
+  }
+};

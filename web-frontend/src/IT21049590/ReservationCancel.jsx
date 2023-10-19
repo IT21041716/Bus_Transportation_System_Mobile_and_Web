@@ -91,28 +91,39 @@ const ReservationCancel = () => {
             <tr>
               <td>
                 <Tooltip title="Update">
-                  <EditOutlined
+                  <Button
+                    type="primary"
                     onClick={
-                      item.status == "Rejected" || item.status == "Cancelled"
+                      item.status === "Rejected" || item.status === "Cancelled"
                         ? () => {}
-                        : () => {
-                            acceptCancellation(item);
-                          }
+                        : () => acceptCancellation(item)
                     }
-                  />
+                    style={{
+                      backgroundColor:
+                        item.status === "Rejected" ||
+                        item.status === "Cancelled"
+                          ? "#d3d3d3"
+                          : "#00cc00",
+                      borderColor: "#00cc00",
+                      color: "white",
+                    }}
+                  >
+                    Accept
+                  </Button>
                 </Tooltip>
               </td>
               <td>
                 <Tooltip title="Cancel">
-                  <StopOutlined
+                  <Button
+                    danger
                     onClick={
-                      item.status == "Rejected" || item.status == "Cancelled"
+                      item.status === "Rejected" || item.status === "Cancelled"
                         ? () => {}
-                        : () => {
-                            rejectCancellation(item);
-                          }
+                        : () => rejectCancellation(item)
                     }
-                  />
+                  >
+                    Reject
+                  </Button>
                 </Tooltip>
               </td>
             </tr>

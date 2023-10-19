@@ -7,6 +7,7 @@ import {
   updateJourney,
   deleteJourney,
   getJourneyByUserId,
+  deleteAllJourneys
 } from "../controllers/JourneyController.js";
 
 const router = express.Router();
@@ -27,5 +28,6 @@ router.put("/:id", updateJourney);
 
 // Delete a Journey by ID
 router.delete("/:id", deleteJourney);
+router.delete("/", deleteAllJourneys); // Add this route
 
 export default router;
