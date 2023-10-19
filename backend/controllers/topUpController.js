@@ -202,15 +202,18 @@ export const deductBalance = async (req, res) => {
 
 export const claimUpdateBalance = async (req, res) => {
   try {
-    const checkCard = await smartCard.findOne({ uId: req.body.UID });
+    
+    const checkCard = await smartCard.findOne({ uId: req.body.createdBy });
+    
     if (checkCard) {
       const availableBalance = checkCard.balance;
       const newBalanace = availableBalance + req.body.price;
+      console.log("Updated ", newBalanace);
 
       const data = {
         balance: newBalanace,
       };
-      const id = { uId: req.body.UID };
+      const id = { uId: req.body.createdBy };
       const update = await smartCard.findOneAndUpdate(id, data, { new: true });
       if (update) {
         //MESSAGE
