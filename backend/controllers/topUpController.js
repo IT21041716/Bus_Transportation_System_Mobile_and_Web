@@ -202,9 +202,9 @@ export const deductBalance = async (req, res) => {
 
 export const claimUpdateBalance = async (req, res) => {
   try {
-    
+
     const checkCard = await smartCard.findOne({ uId: req.body.createdBy });
-    
+
     if (checkCard) {
       const availableBalance = checkCard.balance;
       const newBalanace = availableBalance + req.body.price;

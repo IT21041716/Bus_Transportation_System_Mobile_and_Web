@@ -5,9 +5,11 @@ import { useParams } from "react-router-dom";
 import { PlusOutlined, EditOutlined, StopOutlined } from "@ant-design/icons";
 import axios from "axios";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 const UserJourney = () => {
-  const { UID } = useParams();
+  const user = useSelector((state) => state.auth.user)
+  const UID  = user.UID;
   const API_URL = "http://localhost:5005/journey/";
   const [addModal, setAddModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);

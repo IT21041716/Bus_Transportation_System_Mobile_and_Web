@@ -74,14 +74,14 @@ const topUp = () => {
     };
 
     useEffect(() => {
-        if (!user.smartCardID) {
+        if (user.smartCardID == 'Not Crated') {
             const timeout = setTimeout(() => {
                 Swal.fire({
-                    text: 'You have to log in to your account when you want to use this service. If you are not a registered user, please be kind enough to register..!',
+                    text: 'You are not eligible to access this service. Please request the smartcard before use this service..!',
                     icon: 'warning',
                     confirmButtonText: 'OK',
                 }).then(() => {
-                    navigate('/login');
+                    // navigate('/');
                 });
             }, 3000);
 
@@ -97,11 +97,11 @@ const topUp = () => {
                     <h2 style={{ color: "white" }}>ACCOUNT BALANCE</h2>
                     <h3 style={{ color: "white" }}>Rs:{balance}.00</h3>
                 </div>
-                <Link to={`/userJourney/${UID}`}>
-            <Button type="primary" style={{ marginBottom: 16 }}>
-              Add Reservation
-            </Button>
-          </Link>
+                {/* <Link to={`/userJourney/${UID}`}>
+                    <Button type="primary" style={{ marginBottom: 16 }}>
+                        Add Reservation
+                    </Button>
+                </Link> */}
                 <div className='innerDivContainer' id='innerDivMain'>
                     <div className='smallDiv'>
                         <h4>MOST RECENT TOPUP</h4>

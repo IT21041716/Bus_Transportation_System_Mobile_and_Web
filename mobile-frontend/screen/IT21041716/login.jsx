@@ -84,7 +84,7 @@ const UserLogin = ({ navigation }) => {
             setPassword('');
         }
     }
-    if(authenticated){
+    if (authenticated) {
         navigation.navigate('Main');
     }
 
@@ -94,7 +94,7 @@ const UserLogin = ({ navigation }) => {
             <View style={styles.form}>
                 <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={(text) => setEmail(text)} />
                 <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" value={password} onChangeText={(text) => setPassword(text)} />
-                <TouchableOpacity onPress={sendData} style={styles.button}>
+                <TouchableOpacity onPress={() => sendData()} style={styles.button}>
                     <Text style={styles.buttonText}>Sign In</Text>
                 </TouchableOpacity>
                 <View style={styles.newUser}>

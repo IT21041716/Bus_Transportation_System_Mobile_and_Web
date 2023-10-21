@@ -126,7 +126,7 @@ const UserRegister = () => {
                                             <button onClick={sendData} className="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
                                             <div className="d-flex align-items-center justify-content-center">
                                                 <p className="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                                                <a className="text-primary fw-bold ms-2" href="/login">Sign In</a>
+                                                <a className="text-primary fw-bold ms-2" href="/">Sign In</a>
                                             </div>
                                         </form>
                                     </div>

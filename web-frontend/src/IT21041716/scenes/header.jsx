@@ -42,7 +42,7 @@ const Header = () => {
 
     const renderNonLoggedIn = () => (
         <li className="btn-cta">
-            <a href="/login">
+            <a href="/">
                 <span>Login</span>
             </a>
         </li>
@@ -65,13 +65,16 @@ const Header = () => {
                                 <div className="col-xs-10 text-right menu-1">
                                     <ul>
                                         <li>
-                                            <a href="/">Home</a>
+                                            <a href="/home">Home</a>
                                         </li>
                                         <li>
-                                            <a href="/topup">Start Learning</a>
+                                            <a href="/topup">Top Up</a>
                                         </li>
                                         <li>
-                                            <a href="/admin">About</a>
+                                            <a href="/userJourney">User Journey</a>
+                                        </li>
+                                        <li>
+                                            <a href="/claim">Smart Card</a>
                                         </li>
                                         {authenticated ? renderLoggedIn() : renderNonLoggedIn()}
                                     </ul>

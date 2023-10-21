@@ -50,11 +50,11 @@ function App() {
 
           {/* sithanga */}
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<UserLogin />} />
+          <Route path="/" element={<UserLogin />} />
           <Route path="/topup" element={<TopUp />} />
 
           <Route path="/resCancel/:id" element={<ReservationCancelForm />} />
-          <Route path="/userJourney/:UID" element={<UserJourney />} />
+          <Route path="/userJourney" element={<UserJourney />} />
         </Routes>
       </BrowserRouter>
     </>
