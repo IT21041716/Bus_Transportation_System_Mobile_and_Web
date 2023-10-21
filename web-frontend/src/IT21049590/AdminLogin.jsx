@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {
-  Typography,
-  TextField,
-  Button,
-  Container,
-  Grid,
-} from "@mui/material";
+import { Typography, TextField, Button, Container, Grid } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
+import Navbar from "../IT21041716/scenes/header";
+//import "./Journey.css";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -44,7 +40,9 @@ const AdminLogin = () => {
   };
 
   return (
-    <Container>
+    <div className="MainCon1">
+    <Container  className="MainCon2" >
+      <Navbar />
       <Grid
         container
         direction="column"
@@ -95,6 +93,7 @@ const AdminLogin = () => {
         )}
       </Grid>
     </Container>
+    </div>
   );
 };
 

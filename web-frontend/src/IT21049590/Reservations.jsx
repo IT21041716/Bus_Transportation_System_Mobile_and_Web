@@ -12,6 +12,7 @@ import {
   Tag,
 } from "antd";
 import ReservationService from "./services/reservation_service";
+import "./Journey.css";
 import moment from "moment";
 import ReservationCancelForm from "./ReservationCancelForm"; // Import the ReservationCancelForm component
 import { Link } from "react-router-dom";
@@ -192,7 +193,7 @@ const Reservations = () => {
   };
 
   return (
-    <div>
+    <div className="MainCon">
       {/* <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
         Add Reservation
       </Button> */}

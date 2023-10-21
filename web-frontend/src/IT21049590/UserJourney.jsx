@@ -6,10 +6,12 @@ import { PlusOutlined, EditOutlined, StopOutlined } from "@ant-design/icons";
 import axios from "axios";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import "./Journey.css";
+import Navbar from "../IT21041716/scenes/header";
 
 const UserJourney = () => {
-  const user = useSelector((state) => state.auth.user)
-  const UID  = user.UID;
+  const user = useSelector((state) => state.auth.user);
+  const UID = user.UID;
   const API_URL = "http://localhost:5005/journey/";
   const [addModal, setAddModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
@@ -244,84 +246,37 @@ const UserJourney = () => {
     formUpdate.setFieldValue("price", data.price);
   };
   return (
-    <Fragment>
-      <Modal
-        title="Add New Journey"
-        centered
-        open={addModal}
-        width={800}
-        onOk={() => saveJourney()}
-        onCancel={() => setAddModal(false)}
-      >
-        <Form form={form}>
-          <Row>
-            <Col md={24}>
-              <div className="Form-group">
-                <label>Location</label>
-                <Form.Item name="location">
-                  <select
-                    className="form-select"
-                    onChange={(e) => {
-                      onChangeAddModalLocation(e.target.value);
-                    }}
-                  >
-                    {locations.map((item) => {
-                      return <option value={item.name}>{item.name}</option>;
-                    })}
-                  </select>
-                </Form.Item>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={24}>
-              <div className="Form-group">
-                <label>Date</label>
-                <Form.Item name="date">
-                  <input className="form-control" type="date" />
-                </Form.Item>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={24}>
-              <div className="form-group">
-                <label>Price</label>
-                <Form.Item name="price">
-                  <input className="form-control" disabled type="number" />
-                </Form.Item>
-              </div>
-            </Col>
-          </Row>
-        </Form>
-      </Modal>
-      <Modal
-        title="Update Journey"
-        centered
-        open={updateModal}
-        width={800}
-        onOk={() => updateJourney()}
-        onCancel={() => setUpdateModal(false)}
-      >
-        <Form form={formUpdate}>
-          <Row>
-            <Col md={24}>
-              <div className="form-group">
-                <label>Location</label>
-                <Form.Item name="location">
-                  <select
-                    className="form-select"
-                    onChange={(e) => {
-                      onChangeAddModalLocationUpdate(e.target.value);
-                    }}
-                  >
-                    {locations.map((item) => {
-                      return <option value={item.name}>{item.name}</option>;
-                    })}
-                  </select>
-                </Form.Item>
-              </div>
-            </Col>
+    <div className="MainCon">
+      <Navbar/>
+      <Fragment className="MainCon">
+        <Modal
+          title="Add New Journey"
+          centered
+          open={addModal}
+          width={800}
+          onOk={() => saveJourney()}
+          onCancel={() => setAddModal(false)}
+        >
+          <Form form={form}>
+            <Row>
+              <Col md={24}>
+                <div className="Form-group">
+                  <label>Location</label>
+                  <Form.Item name="location">
+                    <select
+                      className="form-select"
+                      onChange={(e) => {
+                        onChangeAddModalLocation(e.target.value);
+                      }}
+                    >
+                      {locations.map((item) => {
+                        return <option value={item.name}>{item.name}</option>;
+                      })}
+                    </select>
+                  </Form.Item>
+                </div>
+              </Col>
+            </Row>
             <Row>
               <Col md={24}>
                 <div className="Form-group">
@@ -332,58 +287,108 @@ const UserJourney = () => {
                 </div>
               </Col>
             </Row>
-          </Row>
-          <Row>
-            <Col md={24}>
+            <Row>
+              <Col md={24}>
+                <div className="form-group">
+                  <label>Price</label>
+                  <Form.Item name="price">
+                    <input className="form-control" disabled type="number" />
+                  </Form.Item>
+                </div>
+              </Col>
+            </Row>
+          </Form>
+        </Modal>
+        <Modal
+          title="Update Journey"
+          centered
+          open={updateModal}
+          width={800}
+          onOk={() => updateJourney()}
+          onCancel={() => setUpdateModal(false)}
+        >
+          <Form form={formUpdate}>
+            <Row>
+              <Col md={24}>
+                <div className="form-group">
+                  <label>Location</label>
+                  <Form.Item name="location">
+                    <select
+                      className="form-select"
+                      onChange={(e) => {
+                        onChangeAddModalLocationUpdate(e.target.value);
+                      }}
+                    >
+                      {locations.map((item) => {
+                        return <option value={item.name}>{item.name}</option>;
+                      })}
+                    </select>
+                  </Form.Item>
+                </div>
+              </Col>
+              <Row>
+                <Col md={24}>
+                  <div className="Form-group">
+                    <label>Date</label>
+                    <Form.Item name="date">
+                      <input className="form-control" type="date" />
+                    </Form.Item>
+                  </div>
+                </Col>
+              </Row>
+            </Row>
+            <Row>
+              <Col md={24}>
+                <div className="form-group">
+                  <label>Price</label>
+                  <Form.Item name="price">
+                    <input disabled className="form-control" type="number" />
+                  </Form.Item>
+                </div>
+              </Col>
+            </Row>
+          </Form>
+        </Modal>
+        <Modal
+          title="Why are you cancel this ?"
+          centered
+          open={cancelModal}
+          onOk={() => cancelJourney()}
+          onCancel={() => setCancelModal(false)}
+        >
+          <Form form={formCancel}>
+            <Form.Item name="reason">
               <div className="form-group">
-                <label>Price</label>
-                <Form.Item name="price">
-                  <input disabled className="form-control" type="number" />
-                </Form.Item>
+                <label>Reason</label>
+                <input className="form-control" type="text" />
               </div>
-            </Col>
-          </Row>
-        </Form>
-      </Modal>
-      <Modal
-        title="Why are you cancel this ?"
-        centered
-        open={cancelModal}
-        onOk={() => cancelJourney()}
-        onCancel={() => setCancelModal(false)}
-      >
-        <Form form={formCancel}>
-          <Form.Item name="reason">
-            <div className="form-group">
-              <label>Reason</label>
-              <input className="form-control" type="text" />
-            </div>
-          </Form.Item>
-        </Form>
-      </Modal>
-      <Row className="mt-3">
-        <Col md={8}></Col>
-        <Col md={8}>
-          <h1 style={{ textAlign: "center" }}>Your Journeys</h1>
-        </Col>
-        <Col md={8}></Col>
-      </Row>
-      <br></br>
-      <br></br>
-      <br></br>
-      <Row className="mt-4">
-        <Col md={6}></Col>
-        <Col md={12}>
-          <Table
-            columns={columns}
-            dataSource={tableData}
-            rowKey={"_id"}
-            pagination={{ pageSize: 12 }}
-          />
-        </Col>
-        <Col md={6}></Col>
-      </Row>
-    </Fragment>
+            </Form.Item>
+          </Form>
+        </Modal>
+        <Row className="mt-3">
+          <Col md={8}></Col>
+          <Col md={8}>
+            <h1 style={{ textAlign: "center", color:"white" }}>Your Journeys</h1>
+          </Col>
+          <Col md={8}></Col>
+        </Row>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Row className="mt-4">
+          <Col md={6}></Col>
+          <Col md={12}>
+            <Table
+              columns={columns}
+              dataSource={tableData}
+              rowKey={"_id"}
+              pagination={{ pageSize: 12 }}
+            />
+          </Col>
+          <Col md={6}></Col>
+        </Row>
+      </Fragment>
+    </div>
   );
 };
 
