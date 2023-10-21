@@ -247,7 +247,7 @@ const UserJourney = () => {
   };
   return (
     <div className="MainCon">
-      <Navbar/>
+      <Navbar />
       <Fragment className="MainCon">
         <Modal
           title="Add New Journey"
@@ -368,7 +368,7 @@ const UserJourney = () => {
         <Row className="mt-3">
           <Col md={8}></Col>
           <Col md={8}>
-            <h1 style={{ textAlign: "center", color:"white" }}>Your Journeys</h1>
+            <h1 style={{ textAlign: "center", color: "red" }}>Your Journeys</h1>
           </Col>
           <Col md={8}></Col>
         </Row>
