@@ -3,13 +3,17 @@ import mongoose from "mongoose";
 
 const journeySchema = new mongoose.Schema({
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "user",
     required: true,
   },
   reservedDate: {
-    type: Date,
+    type: String,
     required: true,
+  },
+  reason: {
+    type: String,
+    required: false,
   },
   status: {
     type: String,

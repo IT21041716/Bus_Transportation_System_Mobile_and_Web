@@ -1,11 +1,21 @@
 // Reservations.jsx
 
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal, Form, Input, DatePicker, Select } from "antd";
+import {
+  Table,
+  Button,
+  Modal,
+  Form,
+  Input,
+  DatePicker,
+  Select,
+  Tag,
+} from "antd";
 import ReservationService from "./services/reservation_service";
 import moment from "moment";
 import ReservationCancelForm from "./ReservationCancelForm"; // Import the ReservationCancelForm component
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -13,53 +23,94 @@ const Reservations = () => {
   const [cancelModalVisible, setCancelModalVisible] = useState(false); // State to control the cancellation form modal
   const [form] = Form.useForm();
   const [editingReservation, setEditingReservation] = useState(null);
-
+  const API_URL = "http://localhost:5005/journey/";
   const reservationService = ReservationService.getInstance();
+
+  const [tableData, setTableData] = useState([]);
+  const getJourneys = () => {
+    axios
+      .get(API_URL)
+      .then((response) => {
+        console.log(response.data);
+        const temp = response.data.filter((item) => {
+          return item.status !== "Pending";
+        });
+        setTableData(temp);
+      })
+      .catch((error) => {});
+  };
 
   const { Option } = Select;
 
   const columns = [
-  
     {
-      title: "Created By",
+      title: "#",
+      render: (x, xx, index) => {
+        return index + 1;
+      },
+      key: "-1",
+      align: "center",
+    },
+    {
+      title: "User ID",
       dataIndex: "createdBy",
-      key: "createdBy",
+      key: "0",
+      align: "center",
     },
     {
       title: "Reserved Date",
       dataIndex: "reservedDate",
-      key: "reservedDate",
-      render: (text) => moment(text).format("YYYY-MM-DD HH:mm:ss"),
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      key: "0",
+      align: "center",
     },
     {
       title: "Location",
-      dataIndex: "reservedTo",
-      key: "reservedTo",
+      dataIndex: "location",
+      key: "1",
+      align: "center",
     },
     {
-      title: "Actions",
-      dataIndex: "actions",
-      key: "actions",
-
-      render: (_, record) => (
-        <>
-          <Button type="primary" onClick={() => handleEdit(record)}>
-            Edit
-          </Button>
-          <Button danger onClick={() => showDeleteConfirm(record._id)}>
-            Delete
-          </Button>
-          <Button type="primary" onClick={() => showCancelModal(record._id)}>
-            Cancel
-          </Button>
-        </>
-      ),
+      title: "Price",
+      dataIndex: "price",
+      key: "2",
+      align: "center",
     },
+    {
+      title: "Status",
+      render: (data) => {
+        if (data == "Pending") {
+          return <Tag color="processing">Pending Cancellation</Tag>;
+        } else if (data == "Active") {
+          return <Tag color="success">Active</Tag>;
+        } else if (data == "Rejected") {
+          return <Tag color="error">Rejected</Tag>;
+        } else if (data == "Cancelled") {
+          return <Tag color="warning">Cancelled</Tag>;
+        }
+      },
+      dataIndex: "status",
+      key: "3",
+      align: "center",
+    },
+    // {
+    //   title: "Actions",
+    //   dataIndex: "actions",
+    //   key: "actions",
+
+    //   render: (_, record) => (
+    //     <>
+    //       <Button type="primary" onClick={() => handleEdit(record)}>
+    //         Edit
+    //       </Button>
+    //       <Button danger onClick={() => showDeleteConfirm(record._id)}>
+    //         Delete
+    //       </Button>
+    //       <Button type="primary" onClick={() => showCancelModal(record._id)}>
+    //         Cancel
+    //       </Button>
+    //     </>
+    //   ),
+    // },
   ];
 
   const fetchData = async () => {
@@ -72,7 +123,7 @@ const Reservations = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    getJourneys();
   }, []);
 
   const handleAdd = () => {
@@ -142,10 +193,10 @@ const Reservations = () => {
 
   return (
     <div>
-      <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
+      {/* <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
         Add Reservation
-      </Button>
-      <Table dataSource={reservations} columns={columns} rowKey="id" />
+      </Button> */}
+      <Table dataSource={tableData} columns={columns} rowKey="id" />
 
       {/* Add/Edit Reservation Modal */}
       <Modal

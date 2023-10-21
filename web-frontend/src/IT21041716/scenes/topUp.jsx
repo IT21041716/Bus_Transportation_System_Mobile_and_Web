@@ -7,6 +7,8 @@ import StripeCheckout from 'react-stripe-checkout'
 import { NewTopUp } from '../actions/topUpAction'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import { Button } from "antd";
+import { Link } from "react-router-dom";
 
 const topUp = () => {
     const dispatch = useDispatch();
@@ -95,6 +97,11 @@ const topUp = () => {
                     <h2 style={{ color: "white" }}>ACCOUNT BALANCE</h2>
                     <h3 style={{ color: "white" }}>Rs:{balance}.00</h3>
                 </div>
+                <Link to={`/userJourney/${UID}`}>
+            <Button type="primary" style={{ marginBottom: 16 }}>
+              Add Reservation
+            </Button>
+          </Link>
                 <div className='innerDivContainer' id='innerDivMain'>
                     <div className='smallDiv'>
                         <h4>MOST RECENT TOPUP</h4>

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Tabs } from "antd";
-import Reservations from "./Reservations"; // You need to create this component
-import ReservationCancel from "./ReservationCancel"; // You need to create this component
+import ReservationCancel from "./ReservationCancel"; 
 import Layout, { Content, Header } from "antd/es/layout/layout";
 
 const { TabPane } = Tabs;
 
 function AdminProfile() {
-  const [activeTab, setActiveTab] = useState("2"); // Default to the first tab
+  const [activeTab, setActiveTab] = useState("2"); 
 
   const handleTabChange = (key) => {
     setActiveTab(key);
@@ -29,10 +28,8 @@ function AdminProfile() {
       <Content>
         <div style={{ margin: "32px" }}>
           <Tabs activeKey={activeTab} onChange={handleTabChange}>
-            <TabPane tab="Reservations" key="2">
-              <Reservations />
-            </TabPane>
-            <TabPane tab="Reservation Cancel" key="3">
+            
+            <TabPane tab="Reservation Cancel" key="2">
               <ReservationCancel />
             </TabPane>
           </Tabs>
