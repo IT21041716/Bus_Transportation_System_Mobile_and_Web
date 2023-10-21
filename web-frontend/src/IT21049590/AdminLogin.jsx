@@ -1,7 +1,15 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {
+  Typography,
+  TextField,
+  Button,
+  Container,
+  Grid,
+} from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LockIcon from "@mui/icons-material/Lock";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
@@ -36,28 +44,57 @@ const AdminLogin = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button onClick={handleLogin}>Login</button>
-
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-    </div>
+    <Container>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
+        style={{ marginTop: "100px" }}
+      >
+        <Grid item>
+          <Typography variant="h5">Admin Login</Typography>
+        </Grid>
+        <Grid item>
+          <TextField
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            InputProps={{
+              startAdornment: <AccountCircleIcon />,
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <TextField
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              startAdornment: <LockIcon />,
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleLogin}
+            style={{ width: "100%" }}
+          >
+            Login
+          </Button>
+        </Grid>
+        {errorMessage && (
+          <Grid item>
+            <Typography style={{ color: "red" }}>{errorMessage}</Typography>
+          </Grid>
+        )}
+      </Grid>
+    </Container>
   );
 };
 
